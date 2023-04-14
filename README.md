@@ -8,7 +8,7 @@
 
 #### 引入依赖
 ```azure
-
+go get github.com/NoahAmethyst/translator-engine
 ```
 
 <details>
