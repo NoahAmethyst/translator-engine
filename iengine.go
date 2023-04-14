@@ -5,6 +5,11 @@ import (
 	"reflect"
 )
 
+type factory struct {
+}
+
+var EngFactory = factory{}
+
 type IRequest interface {
 	build(ctx context.Context, method, url string, headers map[string]string, requestBody any) error
 	SetHeaders(map[string]string)

@@ -7,8 +7,14 @@ import (
 )
 
 func TestAliTrans(t *testing.T) {
+
+	from := translator_engine.AUTO
+	to := translator_engine.EN
+	src := "这是一段用来测试的文本，它的语言是中文，将要翻译为英文"
+
 	accessId, accessKey := getAliCfg()
-	cli, err := translator_engine.NewAliTransEngine(accessId, accessKey)
+
+	cli, err := translator_engine.EngFactory.BuildAliEngine(accessId, accessKey)
 	if err != nil {
 		panic(err)
 	}
@@ -20,8 +26,13 @@ func TestAliTrans(t *testing.T) {
 }
 
 func TestAliTransWithScene(t *testing.T) {
+
+	from := translator_engine.AUTO
+	to := translator_engine.EN
+	src := "这是一段用来测试的文本，它的语言是中文，将要翻译为英文"
+
 	id, secret := getAliCfg()
-	cli, err := translator_engine.NewAliTransEngine(id, secret)
+	cli, err := translator_engine.EngFactory.BuildAliEngine(id, secret)
 	if err != nil {
 		panic(err)
 	}

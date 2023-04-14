@@ -28,7 +28,7 @@ func (eng *BaiduTransEngine) SetJar(jar http.CookieJar) *BaiduTransEngine {
 	return eng
 }
 
-func NewBaiduTransEngine(apiKey, secretKey string) *BaiduTransEngine {
+func (f *factory) BuildBaiduEng(apiKey, secretKey string) *BaiduTransEngine {
 	return &BaiduTransEngine{
 		client: &http.Client{
 			Transport:     nil,

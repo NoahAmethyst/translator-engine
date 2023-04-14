@@ -28,7 +28,7 @@ func (eng *AliTransEngine) TransTextDirect(src, from, to string, scene ...Scene)
 		}
 
 		resp, _err := eng.client.TranslateGeneral(req)
-		if err != nil {
+		if _err != nil {
 			err = _err
 			return
 		}
@@ -48,7 +48,7 @@ func (eng *AliTransEngine) TransTextDirect(src, from, to string, scene ...Scene)
 		}
 
 		resp, _err := eng.client.Translate(req)
-		if err != nil {
+		if _err != nil {
 			err = _err
 			return
 		}

@@ -16,7 +16,7 @@ type TencentTransEngine struct {
 	secret string
 }
 
-func NewTencentTransEngine(secretId, secretKey string) (*TencentTransEngine, error) {
+func (f *factory) BuildTencentEng(secretId, secretKey string) (*TencentTransEngine, error) {
 	client, err := initTencentCli(secretId, secretKey, "ap-shanghai")
 	return &TencentTransEngine{
 		client: client,

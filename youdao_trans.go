@@ -25,7 +25,7 @@ var youdaoScene map[Scene]string
 
 func encrypt(signStr string) string {
 	if !utf8.ValidString(signStr) {
-		fmt.Printf("encrypt:%q\n", signStr)
+		fmt.Printf("youdao encrypt:%q\n", signStr)
 	}
 
 	hashAlgorithm := sha256.New()
@@ -41,9 +41,27 @@ func truncate(q string) string {
 	if size <= 20 {
 		return q
 	}
-	r := q[:10] + strconv.Itoa(size) + q[size-10:]
+
+	var buffer bytes.Buffer
+	_index := 0
+	for _, _runeV := range q {
+		if _index == 10 {
+			buffer.WriteString(strconv.Itoa(size))
+		}
+
+		if _index < 10 {
+			buffer.WriteString(fmt.Sprintf("%c", _runeV))
+		}
+
+		if _index >= size-10 {
+			buffer.WriteString(fmt.Sprintf("%c", _runeV))
+		}
+
+		_index++
+	}
+	r := buffer.String()
 	if !utf8.ValidString(r) {
-		fmt.Printf("truncate:%q\n", r)
+		fmt.Printf("youdao truncate:%q\n", r)
 	}
 	return r
 }

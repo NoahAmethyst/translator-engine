@@ -16,7 +16,7 @@ type AliTransEngine struct {
 	secret string
 }
 
-func NewAliTransEngine(accessId, accessSecret string) (*AliTransEngine, error) {
+func (f *factory) BuildAliEngine(accessId, accessSecret string) (*AliTransEngine, error) {
 	config := &openapi.Config{
 		AccessKeyId:     tea.String(accessId),
 		AccessKeySecret: tea.String(accessSecret),

@@ -31,7 +31,7 @@ func (eng *YoudaoTransEngine) SetJar(jar http.CookieJar) *YoudaoTransEngine {
 	return eng
 }
 
-func NewYoudaoTranslatorCli(appKey, secretKey string) *YoudaoTransEngine {
+func (f *factory) BuildYoudaoEng(appKey, secretKey string) *YoudaoTransEngine {
 	return &YoudaoTransEngine{
 		client: &http.Client{
 			Transport:     nil,

@@ -7,8 +7,12 @@ import (
 )
 
 func TestBaiduTrans(t *testing.T) {
+	from := translator_engine.AUTO
+	to := translator_engine.EN
+	src := "这是一段用来测试的文本，它的语言是中文，将要翻译为英文"
+
 	apiKey, secretKey := getBaiduCfg()
-	cli := translator_engine.NewBaiduTransEngine(apiKey, secretKey)
+	cli := translator_engine.EngFactory.BuildBaiduEng(apiKey, secretKey)
 	result, err := cli.TransText(src, from, to)
 	if err != nil {
 		panic(err)

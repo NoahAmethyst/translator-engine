@@ -5,13 +5,12 @@ import (
 	"testing"
 )
 
-var from = translator_engine.AUTO
-var to = translator_engine.EN
-var src = "这是一段用来测试的文本，它的语言是中文，将要翻译为英文"
-
 func TestIBaiduTrans(t *testing.T) {
+	from := translator_engine.AUTO
+	to := translator_engine.EN
+	src := "这是一段用来测试的文本，它的语言是中文，将要翻译为英文"
 	apiKey, secretKey := getBaiduCfg()
-	baiduEng := translator_engine.NewBaiduTransEngine(apiKey, secretKey)
+	baiduEng := translator_engine.EngFactory.BuildBaiduEng(apiKey, secretKey)
 	baiduResult, err := translator_engine.TransText(src, from, to, baiduEng)
 	if err != nil {
 		panic(err)
@@ -20,8 +19,11 @@ func TestIBaiduTrans(t *testing.T) {
 }
 
 func TestIYoudaoTrans(t *testing.T) {
+	from := translator_engine.AUTO
+	to := translator_engine.EN
+	src := "这是一段用来测试的文本，它的语言是中文，将要翻译为英文"
 	appKey, secretKey := getYoudaoCfg()
-	youdaoEng := translator_engine.NewYoudaoTranslatorCli(appKey, secretKey)
+	youdaoEng := translator_engine.EngFactory.BuildYoudaoEng(appKey, secretKey)
 	youdaoResult, err := translator_engine.TransText(src, from, to, youdaoEng, translator_engine.Finance)
 	if err != nil {
 		panic(err)
@@ -30,8 +32,11 @@ func TestIYoudaoTrans(t *testing.T) {
 }
 
 func TestITencentTrans(t *testing.T) {
+	from := translator_engine.AUTO
+	to := translator_engine.EN
+	src := "这是一段用来测试的文本，它的语言是中文，将要翻译为英文"
 	secretId, secretKey := getTencentCfg()
-	tencentEng, err := translator_engine.NewTencentTransEngine(secretId, secretKey)
+	tencentEng, err := translator_engine.EngFactory.BuildTencentEng(secretId, secretKey)
 	if err != nil {
 		panic(err)
 	}
@@ -43,8 +48,11 @@ func TestITencentTrans(t *testing.T) {
 }
 
 func TestIAliTrans(t *testing.T) {
+	from := translator_engine.AUTO
+	to := translator_engine.EN
+	src := "这是一段用来测试的文本，它的语言是中文，将要翻译为英文"
 	accessId, accessKey := getAliCfg()
-	aliEng, err := translator_engine.NewAliTransEngine(accessId, accessKey)
+	aliEng, err := translator_engine.EngFactory.BuildAliEngine(accessId, accessKey)
 	if err != nil {
 		panic(err)
 	}
