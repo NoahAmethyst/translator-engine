@@ -36,7 +36,7 @@ func TestYoudaoTransWithScene(t *testing.T) {
 
 	appKey, secretKey := getYoudaoCfg()
 	cli := translator_engine.EngFactory.BuildYoudaoEng(appKey, secretKey)
-	result, err := cli.TransText(src, from, to)
+	result, err := cli.TransText(src, from, to, translator_engine.Finance)
 	if err != nil {
 		panic(err)
 	}
