@@ -113,7 +113,7 @@ func (eng *BaiduTransEngine) TransTextDirect(src, from, to string, _ ...Scene) (
 		err = errors.New("empty translation")
 	}
 	data = &TransResult{
-		From: eng.LanCodeIn(respStruct.From),
+		From: eng.LanCodeOut(respStruct.From),
 		To:   eng.LanCodeOut(respStruct.To),
 		Src:  respStruct.TransResult[0].Src,
 		Dst:  respStruct.TransResult[0].Dst,

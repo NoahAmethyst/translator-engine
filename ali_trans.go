@@ -53,8 +53,8 @@ func (eng *AliTransEngine) TransTextDirect(src, from, to string, scene ...Scene)
 			return
 		}
 		data = &TransResult{
-			From: from,
-			To:   to,
+			From: eng.LanCodeOut(from),
+			To:   eng.LanCodeOut(to),
 			Src:  src,
 			Dst:  *resp.Body.Data.Translated,
 		}

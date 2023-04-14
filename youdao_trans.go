@@ -124,8 +124,8 @@ func (eng *YoudaoTransEngine) TransTextDirect(src, from, to string, scene ...Sce
 	}
 
 	data = &TransResult{
-		From: from,
-		To:   to,
+		From: eng.LanCodeOut(from),
+		To:   eng.LanCodeOut(to),
 		Src:  respStruct.Query,
 		Dst:  respStruct.Translation[0],
 	}
