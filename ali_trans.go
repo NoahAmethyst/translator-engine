@@ -20,7 +20,7 @@ func (eng *AliTransEngine) TransTextDirect(src, from, to string, scene ...Scene)
 		_scene = aliScene[scene[0]]
 	}
 
-	if len(_scene) > 0 {
+	if len(_scene) == 0 {
 		req := &alimt_cli.TranslateGeneralRequest{
 			FormatType:     tea.String("text"),
 			SourceLanguage: tea.String(from),
@@ -33,6 +33,12 @@ func (eng *AliTransEngine) TransTextDirect(src, from, to string, scene ...Scene)
 			err = _err
 			return
 		}
+
+		if *resp.Body.Code != 200 {
+			err = errors.New(*resp.Body.Message)
+			return
+		}
+
 		data = &TransResult{
 			From: from,
 			To:   to,
@@ -54,7 +60,7 @@ func (eng *AliTransEngine) TransTextDirect(src, from, to string, scene ...Scene)
 			return
 		}
 
-		if *resp.StatusCode != 200 {
+		if *resp.Body.Code != 200 {
 			err = errors.New(*resp.Body.Message)
 			return
 		}
