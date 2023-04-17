@@ -10,7 +10,7 @@ func TestAliTrans(t *testing.T) {
 
 	from := translator_engine.AUTO
 	to := translator_engine.EN
-	src := "这是一段用来测试的文本，它的语言是中文，将要翻译为英文"
+	src := "阈值"
 
 	accessId, accessKey := getAliCfg()
 

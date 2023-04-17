@@ -1,6 +1,7 @@
 package translator_engine
 
 import (
+	"errors"
 	alimt_cli "github.com/alibabacloud-go/alimt-20181012/v2/client"
 	"github.com/alibabacloud-go/tea/tea"
 )
@@ -52,6 +53,12 @@ func (eng *AliTransEngine) TransTextDirect(src, from, to string, scene ...Scene)
 			err = _err
 			return
 		}
+
+		if *resp.StatusCode != 200 {
+			err = errors.New(*resp.Body.Message)
+			return
+		}
+
 		data = &TransResult{
 			From: eng.LanCodeOut(from),
 			To:   eng.LanCodeOut(to),
