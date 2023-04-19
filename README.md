@@ -1,6 +1,6 @@
 # API集成翻译引擎
 
-已接入 有道翻译、腾讯翻译、阿里翻译、百度翻译
+已接入 有道翻译、腾讯翻译、阿里翻译、百度翻译、火山翻译
 
 #### 有道，阿里支持领域型翻译（专业化），需要开通对应服务
 
@@ -254,6 +254,56 @@ func TestBaiduTrans(t *testing.T) {
 ```
 
 </details>
+
+
+<details>
+<summary>火山</summary>
+
+```go
+
+/**
+火山专业化翻译需要联系客服
+*/
+import (
+translator_engine "github.com/NoahAmethyst/translator-engine"
+"os"
+"testing"
+)
+
+func TestVolcTrans(t *testing.T) {
+    from := translator_engine.AUTO
+    to := translator_engine.EN
+    src := "这是一段用来测试的文本，它是中文的，将要翻译成英文"
+    
+    appKey := os.Getenv("VOLC_ACCESS_KEY")
+	secretKey := os.Getenv("VOLC_SECRET_KEY")
+    cli := translator_engine.EngFactory.BuildVolcEngine(appKey, secretKey)
+    result, err := cli.TransText(src, from, to)
+    if err != nil {
+    panic(err)
+    }
+    t.Logf("volc translate result:%+v", result)
+    
+    to = translator_engine.ZH
+    src = result.Dst
+	
+    result, err = cli.TransText(src, from, to)
+	
+    if err != nil {
+    panic(err)
+    }
+	
+    t.Logf("volc translate result:%+v", result)
+    
+    }
+
+}
+
+```
+
+</details>
+
+
 <details>
 <summary>通用型</summary>
 
@@ -330,6 +380,22 @@ func TestIAliTrans(t *testing.T) {
 	}
 	t.Logf("ali trans result:%+v", aliResult)
 }
+
+func TestIVolcTrans(t *testing.T) {
+        from := translator_engine.AUTO
+        to := translator_engine.EN
+        src := "这是一段用来测试的文本，它的语言是中文，将要翻译为英文"
+        appKey := os.Getenv("VOLC_ACCESS_KEY")
+        secretKey := os.Getenv("VOLC_SECRET_KEY")
+        volcEng := translator_engine.EngFactory.BuildVolcEngine(accessId, accessKey)
+        
+        volcResult, err := translator_engine.TransText(src, from, to, volcEng)
+        if err != nil {
+        panic(err)
+        }
+        t.Logf("ali trans result:%+v", volcResult)
+}
+
 ```
 
 
