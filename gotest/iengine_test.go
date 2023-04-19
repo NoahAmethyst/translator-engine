@@ -63,3 +63,17 @@ func TestIAliTrans(t *testing.T) {
 	}
 	t.Logf("ali trans result:%+v", aliResult)
 }
+
+func TestIVolcTrans(t *testing.T) {
+	from := translator_engine.AUTO
+	to := translator_engine.EN
+	src := "这是一段用来测试的文本，它的语言是中文，将要翻译为英文"
+	accessId, accessKey := getVolcConfig()
+	volcEng := translator_engine.EngFactory.BuildVolcEngine(accessId, accessKey)
+
+	volcResult, err := translator_engine.TransText(src, from, to, volcEng)
+	if err != nil {
+		panic(err)
+	}
+	t.Logf("ali trans result:%+v", volcResult)
+}
