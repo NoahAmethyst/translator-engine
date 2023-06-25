@@ -1,5 +1,9 @@
 package translator_engine
 
+import "sync"
+
+var once sync.Once
+
 const (
 	// ZH 中文
 	ZH = "zh"
@@ -38,10 +42,13 @@ const (
 )
 
 func switchLanCodeMap(in, out map[string]string) {
-	if out == nil {
-		out = map[string]string{}
-	}
+	once.Do(func() {
+		if out == nil {
+			out = map[string]string{}
+		}
+	})
 	for k, v := range in {
 		out[v] = k
 	}
+
 }
